@@ -1,5 +1,6 @@
 import java.awt.Robot;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -20,7 +21,8 @@ public class Robo {
             listaCheque.add(c);
         }
         for(final Cheque c : listaCheque){
-            exibirNumero(digitos, c);
+            ArrayList<String> pegandoNum = exibirNumero(digitos, c);
+            int tamanho = pegandoNum.size();
         }
 
                 final Robot robozin = new Robot();
@@ -28,6 +30,7 @@ public class Robo {
                 for(final Cheque e: listaCheque){
                     robozin.mouseMove(60, 218);
                     robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+
                     /*robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
                     robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
                     robozin.mouseMove(5,59);
@@ -53,22 +56,11 @@ public class Robo {
                     robozin.keyPress(KeyEvent.VK_V);
                     robozin.keyRelease(KeyEvent.VK_CONTROL);
                     robozin.keyRelease(KeyEvent.VK_V);*/
-    
-    
-    
-                
-    
-                    
-    
-    
-            } catch (final AWTException e) {
-                    e.printStackTrace();
-            }
-        }
 
     }
 
-    public static void exibirNumero(final int digitos, final Cheque c) {
+    public static ArrayList<String> exibirNumero(final int digitos, final Cheque c) {
+        final ArrayList<String> lista_Separada = new ArrayList <String> ();
         if(digitos == 6){
             final String varNumInteiro = c.getNumero();
             final String var1 = varNumInteiro.substring(0);
@@ -77,25 +69,58 @@ public class Robo {
             final String var4 = varNumInteiro.substring(3);
             final String var5 = varNumInteiro.substring(4);
             final String var6 = varNumInteiro.substring(5);
+            lista_Separada.clear();
+            lista_Separada.add(var1, var2, var3, var4, var5, var6);
+            return lista_Separada;
         }else if(digitos == 4){
             final String varNumInteiro = c.getNumero();
             final String var1 = varNumInteiro.substring(0);
             final String var2 = varNumInteiro.substring(1);
             final String var3 = varNumInteiro.substring(2);
             final String var4 = varNumInteiro.substring(3);
+            lista_Separada.clear();
+            lista_Separada.add(var1, var2, var3, var4);
+            return lista_Separada;
         }
-    public static String transformandoStringEmKey(String varMomento){   
-        String keyNum0 = "VK_0";
-        String keyNum1 = "VK_1";
-        String keyNum2 = "VK_2";
-        String keyNum3 = "VK_3";
-        String keyNum4 = "VK_4";
-        String keyNum5 = "VK_5";
-        String keyNum6 = "VK_6";
-        String keyNum7 = "VK_7";
-        String keyNum8 = "VK_8";
-        String keyNum9 = "VK_9";
-        ArrayList <String> listaKeys = (keyNum0, keyNum1,keyNum2, keyNum3, keyNum4,keyNum5, keyNum6, keyNum7, keyNum8, keyNum9);
+    public static String transformandoStringEmKey(final String varMomento) {
+
+        final String keyNum0 = "VK_0";
+        final String keyNum1 = "VK_1";
+        final String keyNum2 = "VK_2";
+        final String keyNum3 = "VK_3";
+        final String keyNum4 = "VK_4";
+        final String keyNum5 = "VK_5";
+        final String keyNum6 = "VK_6";
+        final String keyNum7 = "VK_7";
+        final String keyNum8 = "VK_8";
+        final String keyNum9 = "VK_9";
+
+        if(varMomento == "0"){
+            return keyNum0;
+        }else if(varMomento == "1"){
+            return keyNum1;
+        }else if(varMomento == "2"){
+            return keyNum2;
+        }else if(varMomento == "3"){
+            return keyNum3;
+        }else if(varMomento == "4"){
+            return keyNum4;
+        }else if(varMomento == "5"){
+            return keyNum5;
+        }else if(varMomento == "6"){
+            return keyNum6;
+        }else if(varMomento == "7"){
+            return keyNum7;
+        }else if(varMomento == "8"){
+            return keyNum8;
+        }else if(varMomento == "9"){
+            return keyNum9;
+        }else{
+            return "DeuERROMoral.txt";
+        }
+
+
+        /*ArrayList <String> listaKeys = (keyNum0, keyNum1,keyNum2, keyNum3, keyNum4,keyNum5, keyNum6, keyNum7, keyNum8, keyNum9);
         for(String i: listaKeys){
             if(i.equalsIgnoreCase(varMomento){
                 return i;
@@ -103,28 +128,6 @@ public class Robo {
                 return "Deu pau no EXCEL";
             }
 
-        }
-        
-        
-        if(varMomento == keyNum0){
-            //implementar
-        }else if( varMomento == keyNum1){
-            //implementar
-        }else if( varMomento == keyNum2){
-            //implementar
-        }else if( varMomento == keyNum3){
-            //implementar
-        }else if( varMomento == keyNum4){
-            //implementar
-        }else if( varMomento == keyNum5){
-            //implementar
-        }
-
-
-
-
-
-    }
-
+        }*/
     }
 }
