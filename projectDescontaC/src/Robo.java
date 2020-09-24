@@ -8,24 +8,47 @@ import java.awt.AWTException;
 
 public class Robo {
     public static void main (final String[] args) {
-    
+
+        final Robot robozin = new Robot();
         final ArrayList <Cheque> listaCheque = new ArrayList<>();
         final int _VALOR = 70;
         final String _DATA = "22/09/2020";
         final int _CONTA = 1;
         final int nx = Integer.parseInt(JOptionPane.showInputDialog("Quantos cheques quer descontar?"));
         final int digitos = Integer.parseInt(JOptionPane.showInputDialog("Desses cheques que irá inserir, tem quantos digitos no geral?"));
+        
         for(int k = 0; k < nx; k++){
             final String chequeUnitario = JOptionPane.showInputDialog("Qual o numero do Cheque?");
             final Cheque c  = new Cheque (chequeUnitario);
             listaCheque.add(c);
         }
-        for(final Cheque c : listaCheque){
-            ArrayList<String> pegandoNum = exibirNumero(digitos, c);
-            int tamanho = pegandoNum.size();
-        }
 
-                final Robot robozin = new Robot();
+
+        for(final Cheque c : listaCheque){
+            final ArrayList<Integer> pegandoNumArray = exibirNumero(digitos, c);
+    
+            robozin.mouseMove(412, 147);
+            robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+            
+            for(final int i : pegandoNumArray){
+                final int pegandoNum = transformandoNumeroEmKey(i);
+                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
+                robozin.delay(4000);
+                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
+                robozin.keyPress(pegandoNum);
+                robozin.keyRelease(pegandoNum);
+            }
+            //219, 285
+            robozin.mouseMove(219, 285);
+            robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+            robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+            
+
+
+
+        }   
+
+                
                 robozin.delay(5000);
                 for(final Cheque e: listaCheque){
                     robozin.mouseMove(60, 218);
@@ -59,32 +82,37 @@ public class Robo {
 
     }
 
-    public static ArrayList<String> exibirNumero(final int digitos, final Cheque c) {
-        final ArrayList<String> lista_Separada = new ArrayList <String> ();
+    public static ArrayList<Integer> exibirNumero(final int digitos, final Cheque c) {
+        final ArrayList<Integer> lista_Separada = new ArrayList <> ();
         if(digitos == 6){
             final String varNumInteiro = c.getNumero();
-            final String var1 = varNumInteiro.substring(0);
-            final String var2 = varNumInteiro.substring(1);
-            final String var3 = varNumInteiro.substring(2);
-            final String var4 = varNumInteiro.substring(3);
-            final String var5 = varNumInteiro.substring(4);
-            final String var6 = varNumInteiro.substring(5);
+            final int var1 = Integer.parseInt(varNumInteiro.substring(0));
+            final int var2 = Integer.parseInt(varNumInteiro.substring(1));
+            final int var3 = Integer.parseInt(varNumInteiro.substring(2));
+            final int var4 = Integer.parseInt(varNumInteiro.substring(3));
+            final int var5 = Integer.parseInt(varNumInteiro.substring(4));
+            final int var6 = Integer.parseInt(varNumInteiro.substring(5));
+
             lista_Separada.clear();
-            lista_Separada.add(var1, var2, var3, var4, var5, var6);
+            lista_Separada.add(var1, var2);
+            lista_Separada.add(var3, var4);
+            lista_Separada.add(var5, var6);
             return lista_Separada;
+
         }else if(digitos == 4){
             final String varNumInteiro = c.getNumero();
-            final String var1 = varNumInteiro.substring(0);
-            final String var2 = varNumInteiro.substring(1);
-            final String var3 = varNumInteiro.substring(2);
-            final String var4 = varNumInteiro.substring(3);
+            final int var1 = Integer.parseInt(varNumInteiro.substring(0));
+            final int var2 = Integer.parseInt(varNumInteiro.substring(1));
+            final int var3 = Integer.parseInt(varNumInteiro.substring(2));
+            final int var4 = Integer.parseInt(varNumInteiro.substring(3));
             lista_Separada.clear();
-            lista_Separada.add(var1, var2, var3, var4);
+            lista_Separada.add(var1, var2);
+            lista_Separada.add(var3, var4);
             return lista_Separada;
         }
-    public static String transformandoStringEmKey(final String varMomento) {
+    public static int transformandoNumeroEmKey(final int varMomento) {
 
-        final String keyNum0 = "VK_0";
+        /*final String keyNum0 = "VK_0";
         final String keyNum1 = "VK_1";
         final String keyNum2 = "VK_2";
         final String keyNum3 = "VK_3";
@@ -93,30 +121,30 @@ public class Robo {
         final String keyNum6 = "VK_6";
         final String keyNum7 = "VK_7";
         final String keyNum8 = "VK_8";
-        final String keyNum9 = "VK_9";
+        final String keyNum9 = "VK_9";*/
 
-        if(varMomento == "0"){
-            return keyNum0;
-        }else if(varMomento == "1"){
-            return keyNum1;
-        }else if(varMomento == "2"){
-            return keyNum2;
-        }else if(varMomento == "3"){
-            return keyNum3;
-        }else if(varMomento == "4"){
-            return keyNum4;
-        }else if(varMomento == "5"){
-            return keyNum5;
-        }else if(varMomento == "6"){
-            return keyNum6;
-        }else if(varMomento == "7"){
-            return keyNum7;
-        }else if(varMomento == "8"){
-            return keyNum8;
-        }else if(varMomento == "9"){
-            return keyNum9;
+        if(varMomento == 0){
+            return 48;
+        }else if(varMomento == 1){
+            return 49;
+        }else if(varMomento == 2){
+            return 50;
+        }else if(varMomento == 3){
+            return 51;
+        }else if(varMomento == 4){
+            return 52;
+        }else if(varMomento == 5){
+            return 53;
+        }else if(varMomento == 6){
+            return 54;
+        }else if(varMomento == 7){
+            return 55;
+        }else if(varMomento == 8){
+            return 56;
+        }else if(varMomento == 9){
+            return 57;
         }else{
-            return "DeuERROMoral.txt";
+            return 1;
         }
 
 
