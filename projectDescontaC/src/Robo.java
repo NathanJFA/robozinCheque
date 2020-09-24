@@ -42,6 +42,8 @@ public class Robo {
             robozin.mouseMove(219, 285);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+            //mudando
+
             
 
 
