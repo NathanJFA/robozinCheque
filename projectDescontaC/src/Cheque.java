@@ -7,4 +7,7 @@ public class Cheque {
     public Cheque (){
         this.numero = "";
     }
+    public String getNumero(){
+        return numero;
+    }
 }
