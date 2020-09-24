@@ -7,7 +7,7 @@ import java.awt.AWTException;
 
 public class Robo {
     public static void main (final String[] args) throws AWTException {
-        final Robo classRobo = new Robo();
+
         final Robot robozin = new Robot();
         final ArrayList <Cheque> listaCheque = new ArrayList<>();
         final int _VALOR = 70;
@@ -16,33 +16,43 @@ public class Robo {
         final int nx = Integer.parseInt(JOptionPane.showInputDialog("Quantos cheques quer descontar?"));
         final int digitos = Integer.parseInt(JOptionPane.showInputDialog("Desses cheques que irá inserir, tem quantos digitos no geral?"));
         
+        //PEGANDO O NUMERO DO CHEQUE
         for(int k = 0; k < nx; k++){
             final String chequeUnitario = JOptionPane.showInputDialog("Qual o numero do Cheque?");
             final Cheque c  = new Cheque (chequeUnitario);
             listaCheque.add(c);
         }
-
-
+        JOptionPane.showMessageDialog(null, "Mude sua tela");
+        robozin.delay(4000);
+        //FAZ A OPERAÇÃO COMPLETA DE UM DESCONTO DE CHEQUE
         for(final Cheque c : listaCheque){
-            final ArrayList<Integer> pegandoNumArray = Robo.dividindoNumero(digitos, c);
-
+            
+            JOptionPane.showMessageDialog(null, "teste1");
+            //CLICA NA CAIXA DO CHEQUE
             robozin.mouseMove(412, 147);
+            JOptionPane.showMessageDialog(null, "teste2");
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
-            // PEGANDO AS KEYS DO CHEQUE
-            for (final int i : pegandoNumArray) {
-                final int pegandoNum = transformandoNumeroEmKey(i);
-                // CLICANDO NA CAIXA CHEQUE
+
+            for(int k = 0 ; k < nx ; k++){
+                final ArrayList<Integer> pegandoNumArray = dividindoNumero(digitos, c);
+                //DANDO UM CLEAR NA CAIXA DO CHEQUE
                 robozin.keyPress(KeyEvent.VK_BACK_SPACE);
                 robozin.delay(4000);
                 robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                robozin.keyPress(pegandoNum);
-                robozin.keyRelease(pegandoNum);
+                for (final int i : pegandoNumArray) {
+                    //DIGITANDO AS KEYS DO CHEQUE
+                    final int pegandoNum = transformandoNumeroEmKey(i);  
+                    robozin.keyPress(pegandoNum);
+                    robozin.keyRelease(pegandoNum);
+                }
             }
             // CLICANDO NA CAIXA (DESCONTAR "SIM")
             robozin.mouseMove(219, 285);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
-            // CLICANDO NA DATA 290,345
+
+            // CLICANDO NA DATA 
+            //290,345
             robozin.mouseMove(290, 345);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
@@ -55,10 +65,11 @@ public class Robo {
             robozin.keyPress(KeyEvent.VK_V);
             robozin.keyRelease(KeyEvent.VK_CONTROL);
             robozin.keyRelease(KeyEvent.VK_V);
-        }
-        JOptionPane.showMessageDialog(null, "teste");
-    }
 
+            JOptionPane.showMessageDialog(null,"FIM..");
+        }
+    }
+    //FUNÇÃO PRA RETORNAR OS KEYSCODES
     public static int transformandoNumeroEmKey(final int varMomento) {
 
         if (varMomento == 0) {
@@ -85,7 +96,7 @@ public class Robo {
             return 1;
         }
     }
-
+    //FUNÇÃO PRA RECEBER O CHEQUE COMO STRING E SUBDIVIDIR EM UMA LISTA (COMO INT)
     public static ArrayList<Integer> dividindoNumero(final int digitos, final Cheque c) {
         final ArrayList<Integer> lista_Separada = new ArrayList <> ();
         if(digitos == 6){
