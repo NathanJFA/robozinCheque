@@ -30,29 +30,27 @@ public class Robo {
             //CLICA NA CAIXA DO CHEQUE
             robozin.mouseMove(412, 147);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+            robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
 
-            for(int k = 0 ; k < nx ; k++){
-                final ArrayList<Integer> pegandoNumArray = dividindoNumero(digitos, c);
-                //DANDO UM CLEAR NA CAIXA DO CHEQUE
+            final ArrayList<Integer> pegandoNumArray = dividindoNumero(digitos, c);
+            //DANDO UM CLEAR NA CAIXA DO CHEQUE
+            int w = 0;
+            while(w < digitos){
                 robozin.keyPress(KeyEvent.VK_BACK_SPACE);
                 robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
-                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
-                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
-                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
-                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
-                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                for (final int i : pegandoNumArray) {
-                    //DIGITANDO AS KEYS DO CHEQUE
-                    final int pegandoNum = transformandoNumeroEmKey(i);  
-                    robozin.keyPress(pegandoNum);
-                    robozin.keyRelease(pegandoNum);
-                }
+                robozin.delay(100);
+                w++;
             }
+            int f = 0;
+            while(f < digitos) {
+                //DIGITANDO AS KEYS DO CHEQUE
+                //debugar
+                final int pegandoNum = transformandoNumeroEmKey(Integer.parseInt(c.getNumero());  
+                robozin.keyPress(pegandoNum);
+                robozin.keyRelease(pegandoNum);
+                f++;
+            }
+            
             // CLICANDO NA CAIXA (DESCONTAR "SIM")
             robozin.mouseMove(219, 285);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
@@ -64,7 +62,10 @@ public class Robo {
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.keyPress(KeyEvent.VK_BACK_SPACE);
+            robozin.delay(3000);
+            robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
             robozin.keyPress(KeyEvent.VK_DELETE);
+            robozin.delay(3000);
             robozin.keyPress(KeyEvent.VK_DELETE);
 
             // LEMBRAR DE COPIAR A DATA
@@ -80,25 +81,25 @@ public class Robo {
     public static int transformandoNumeroEmKey(final int varMomento) {
 
         if (varMomento == 0) {
-            return 48;
+            return 96;
         } else if (varMomento == 1) {
-            return 49;
+            return 97;
         } else if (varMomento == 2) {
-            return 50;
+            return 98;
         } else if (varMomento == 3) {
-            return 51;
+            return 99;
         } else if (varMomento == 4) {
-            return 52;
+            return 100;
         } else if (varMomento == 5) {
-            return 53;
+            return 101;
         } else if (varMomento == 6) {
-            return 54;
+            return 102;
         } else if (varMomento == 7) {
-            return 55;
+            return 103;
         } else if (varMomento == 8) {
-            return 56;
+            return 104;
         } else if (varMomento == 9) {
-            return 57;
+            return 105;
         } else {
             return 1;
         }
