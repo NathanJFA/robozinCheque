@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import java.awt.AWTException;
 
 public class Robo {
-    public static void main (final String[] args) throws AWTException {
+    public static void main (final String[] args) throws Exception {
 
         final Robot robozin = new Robot();
         final ArrayList <Cheque> listaCheque = new ArrayList<>();
@@ -26,18 +26,25 @@ public class Robo {
         robozin.delay(4000);
         //FAZ A OPERAÇÃO COMPLETA DE UM DESCONTO DE CHEQUE
         for(final Cheque c : listaCheque){
-            
-            JOptionPane.showMessageDialog(null, "teste1");
+    
             //CLICA NA CAIXA DO CHEQUE
             robozin.mouseMove(412, 147);
-            JOptionPane.showMessageDialog(null, "teste2");
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
 
             for(int k = 0 ; k < nx ; k++){
                 final ArrayList<Integer> pegandoNumArray = dividindoNumero(digitos, c);
                 //DANDO UM CLEAR NA CAIXA DO CHEQUE
                 robozin.keyPress(KeyEvent.VK_BACK_SPACE);
-                robozin.delay(4000);
+                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
+                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
+                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
+                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
+                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
+                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
+                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
+                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
+                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
+                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
                 robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
                 for (final int i : pegandoNumArray) {
                     //DIGITANDO AS KEYS DO CHEQUE
@@ -66,8 +73,8 @@ public class Robo {
             robozin.keyRelease(KeyEvent.VK_CONTROL);
             robozin.keyRelease(KeyEvent.VK_V);
 
-            JOptionPane.showMessageDialog(null,"FIM..");
-        }
+            
+        }JOptionPane.showMessageDialog(null,"FIM..");
     }
     //FUNÇÃO PRA RETORNAR OS KEYSCODES
     public static int transformandoNumeroEmKey(final int varMomento) {
@@ -97,35 +104,37 @@ public class Robo {
         }
     }
     //FUNÇÃO PRA RECEBER O CHEQUE COMO STRING E SUBDIVIDIR EM UMA LISTA (COMO INT)
-    public static ArrayList<Integer> dividindoNumero(final int digitos, final Cheque c) {
+    public static ArrayList<Integer> dividindoNumero(final int digitos, final Cheque c) throws Exception {
         final ArrayList<Integer> lista_Separada = new ArrayList <> ();
-        if(digitos == 6){
-            final String varNumInteiro = c.getNumero();
-            final int var1 = Integer.parseInt(varNumInteiro.substring(0));
-            final int var2 = Integer.parseInt(varNumInteiro.substring(1));
-            final int var3 = Integer.parseInt(varNumInteiro.substring(2));
-            final int var4 = Integer.parseInt(varNumInteiro.substring(3));
-            final int var5 = Integer.parseInt(varNumInteiro.substring(4));
-            final int var6 = Integer.parseInt(varNumInteiro.substring(5));
+        try{
+            if(digitos == 6){
+                final String varNumInteiro = c.getNumero();
+                final Integer var1 = Integer.parseInt(varNumInteiro.substring(0));
+                final Integer var2 = Integer.parseInt(varNumInteiro.substring(1));
+                final Integer var3 = Integer.parseInt(varNumInteiro.substring(2));
+                final Integer var4 = Integer.parseInt(varNumInteiro.substring(3));
+                final Integer var5 = Integer.parseInt(varNumInteiro.substring(4));
+                final Integer var6 = Integer.parseInt(varNumInteiro.substring(5));
 
-            lista_Separada.clear();
-            lista_Separada.add(var1, var2);
-            lista_Separada.add(var3, var4);
-            lista_Separada.add(var5, var6);
-            return lista_Separada;
+                lista_Separada.clear();
+                lista_Separada.add(var1, var2);
+                lista_Separada.add(var3, var4);
+                lista_Separada.add(var5, var6);
 
-        }else if(digitos == 4){
-            final String varNumInteiro = c.getNumero();
-            final int var1 = Integer.parseInt(varNumInteiro.substring(0));
-            final int var2 = Integer.parseInt(varNumInteiro.substring(1));
-            final int var3 = Integer.parseInt(varNumInteiro.substring(2));
-            final int var4 = Integer.parseInt(varNumInteiro.substring(3));
-            lista_Separada.clear();
-            lista_Separada.add(var1, var2);
-            lista_Separada.add(var3, var4);
-            return lista_Separada;
-        }else{
-            return lista_Separada;
+            }if(digitos == 4){
+                final String varNumInteiro = c.getNumero();
+                final Integer var1 = Integer.parseInt(varNumInteiro.substring(0));
+                final Integer var2 = Integer.parseInt(varNumInteiro.substring(1));
+                final Integer var3 = Integer.parseInt(varNumInteiro.substring(2));
+                final Integer var4 = Integer.parseInt(varNumInteiro.substring(3));
+                lista_Separada.clear();
+                lista_Separada.add(var1, var2);
+                lista_Separada.add(var3, var4);
+            }
         }
+        catch (final Exception e) {
+                System.out.println("Erro na Subdivisão dos Números" + e);
+        }
+        return lista_Separada;
     }
 }
