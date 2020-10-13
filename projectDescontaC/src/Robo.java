@@ -26,13 +26,13 @@ public class Robo {
         robozin.delay(4000);
         //FAZ A OPERAÇÃO COMPLETA DE UM DESCONTO DE CHEQUE
         for(final Cheque c : listaCheque){
-    
+           
             //CLICA NA CAIXA DO CHEQUE
             robozin.mouseMove(412, 147);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
 
-            final ArrayList<Integer> pegandoNumArray = dividindoNumero(digitos, c);
+           //final ArrayList<Integer> pegandoNumArray = dividindoNumero(digitos, c);
             //DANDO UM CLEAR NA CAIXA DO CHEQUE
             int w = 0;
             while(w < digitos){
@@ -41,14 +41,47 @@ public class Robo {
                 robozin.delay(100);
                 w++;
             }
-            int f = 0;
-            while(f < digitos) {
-                //DIGITANDO AS KEYS DO CHEQUE
-                //debugar
-                final int pegandoNum = transformandoNumeroEmKey(Integer.parseInt(c.getNumero());  
-                robozin.keyPress(pegandoNum);
-                robozin.keyRelease(pegandoNum);
-                f++;
+            //PEGA O CHEQUE E SEPARA NUMERO A NUMERO DENTRO DO ARRAY.
+            int[] arrayN = new int[c.getNumero().length()];
+            int k = 0;
+            while(k < c.getNumero().length()){
+                arrayN[k] = Character.getNumericValue(c.getNumero().charAt(k));
+                k++;
+            }
+            //DIGITANDO AS KEYS DO CHEQUE
+            for(int i : arrayN){
+                
+                if(i == 0){
+                    robozin.keyPress(KeyEvent.VK_0);
+                    robozin.keyRelease(KeyEvent.VK_0);
+                }else if(i == 1){
+                    robozin.keyPress(KeyEvent.VK_1);
+                    robozin.keyRelease(KeyEvent.VK_1);
+                }else if(i == 2){
+                    robozin.keyPress(KeyEvent.VK_2);
+                    robozin.keyRelease(KeyEvent.VK_2);
+                }else if(i == 3){
+                    robozin.keyPress(KeyEvent.VK_3);
+                    robozin.keyRelease(KeyEvent.VK_3);
+                }else if(i == 4){
+                    robozin.keyPress(KeyEvent.VK_4);
+                    robozin.keyRelease(KeyEvent.VK_4);
+                }else if(i == 5){
+                    robozin.keyPress(KeyEvent.VK_5);
+                    robozin.keyRelease(KeyEvent.VK_5);
+                }else if(i == 6){
+                    robozin.keyPress(KeyEvent.VK_6);
+                    robozin.keyRelease(KeyEvent.VK_6);
+                }else if(i == 7){
+                    robozin.keyPress(KeyEvent.VK_7);
+                    robozin.keyRelease(KeyEvent.VK_7);
+                }else if(i == 8){
+                    robozin.keyPress(KeyEvent.VK_8);
+                    robozin.keyRelease(KeyEvent.VK_8);
+                }else if(i == 8){
+                    robozin.keyPress(KeyEvent.VK_9);
+                    robozin.keyRelease(KeyEvent.VK_9);
+                }
             }
             
             // CLICANDO NA CAIXA (DESCONTAR "SIM")
@@ -77,33 +110,7 @@ public class Robo {
             
         }JOptionPane.showMessageDialog(null,"FIM..");
     }
-    //FUNÇÃO PRA RETORNAR OS KEYSCODES
-    public static int transformandoNumeroEmKey(final int varMomento) {
 
-        if (varMomento == 0) {
-            return 96;
-        } else if (varMomento == 1) {
-            return 97;
-        } else if (varMomento == 2) {
-            return 98;
-        } else if (varMomento == 3) {
-            return 99;
-        } else if (varMomento == 4) {
-            return 100;
-        } else if (varMomento == 5) {
-            return 101;
-        } else if (varMomento == 6) {
-            return 102;
-        } else if (varMomento == 7) {
-            return 103;
-        } else if (varMomento == 8) {
-            return 104;
-        } else if (varMomento == 9) {
-            return 105;
-        } else {
-            return 1;
-        }
-    }
     //FUNÇÃO PRA RECEBER O CHEQUE COMO STRING E SUBDIVIDIR EM UMA LISTA (COMO INT)
     public static ArrayList<Integer> dividindoNumero(final int digitos, final Cheque c) throws Exception {
         final ArrayList<Integer> lista_Separada = new ArrayList <> ();
