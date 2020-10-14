@@ -11,7 +11,7 @@ public class Robo {
         final Robot robozin = new Robot();
         final ArrayList <Cheque> listaCheque = new ArrayList<>();
         final int _VALOR = 70;
-        final String _DATA = "13/09/2020";
+        final String _DATA = "01/10/2020";
         final int _CONTA = 1;
         final int nx = Integer.parseInt(JOptionPane.showInputDialog("Quantos cheques quer descontar?"));
         final int digitos = Integer.parseInt(JOptionPane.showInputDialog("Desses cheques que irá inserir, tem quantos digitos no geral?"));
@@ -28,7 +28,7 @@ public class Robo {
         robozin.delay(4000);
         //FAZ A OPERAÇÃO COMPLETA DE UM DESCONTO DE CHEQUE
         for(final Cheque c : listaCheque){
-            robozin.delay(700);
+            robozin.delay(600);
            
             //CLICA NA CAIXA DO CHEQUE
             robozin.mouseMove(412, 147);
@@ -40,7 +40,7 @@ public class Robo {
             while(w < digitos){
                 robozin.keyPress(KeyEvent.VK_BACK_SPACE);
                 robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-                robozin.delay(100);
+                robozin.delay(400);
                 w++;
             }
             //PEGA O CHEQUE E SEPARA NUMERO A NUMERO DENTRO DO ARRAY.
@@ -56,7 +56,6 @@ public class Robo {
                 if(i == 0){
                     robozin.keyPress(KeyEvent.VK_0);
                     robozin.keyRelease(KeyEvent.VK_0);
-                    
                 }else if(i == 1){
                     robozin.keyPress(KeyEvent.VK_1);
                     robozin.keyRelease(KeyEvent.VK_1);
@@ -87,28 +86,56 @@ public class Robo {
                 }
                 robozin.delay(500);
             }
+            robozin.keyPress(KeyEvent.VK_ENTER);
+            robozin.keyRelease(KeyEvent.VK_ENTER);
+            robozin.delay(1000);
+            //699, 421
+            robozin.mouseMove(699, 421);
+            robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+            robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+            
+
+            
+
             
             // CLICANDO NA CAIXA (DESCONTAR "SIM")
             robozin.mouseMove(219, 285);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.delay(1000);
-
+            robozin.keyPress(KeyEvent.VK_ENTER);
+            robozin.keyRelease(KeyEvent.VK_ENTER);  
+            robozin.delay(1000);
+            //718,415
+            robozin.mouseMove(718, 415);
+            robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+            robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+            robozin.mouseMove(699, 421);
+            robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+            robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
             // CLICANDO NA DATA 
             //290,345
             robozin.mouseMove(290, 345);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.delay(1000);
-            robozin.keyPress(KeyEvent.VK_BACK_SPACE);
-            robozin.delay(3000);
-            robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
-            robozin.keyPress(KeyEvent.VK_DELETE);
-            robozin.delay(3000);
-            robozin.keyPress(KeyEvent.VK_DELETE);
+
+            int digitosData = 10;
+            for(int i = 0; i < digitosData; i++){
+                robozin.keyPress(KeyEvent.VK_BACK_SPACE);
+                robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
+                robozin.delay(500);
+            
+            }for(int i = 0; i < digitosData; i++) {
+                robozin.keyPress(KeyEvent.VK_DELETE);
+                robozin.keyPress(KeyEvent.VK_DELETE);
+                robozin.delay(500);
+                
+            }
+               
 
             // LEMBRAR DE COPIAR A DATA
-            robozin.delay(1000);
+            robozin.delay(150);
             robozin.keyPress(KeyEvent.VK_CONTROL);
             robozin.keyPress(KeyEvent.VK_V);
             robozin.keyRelease(KeyEvent.VK_CONTROL);
@@ -116,12 +143,12 @@ public class Robo {
             
             robozin.delay(1000);
             robozin.keyPress(KeyEvent.VK_F12);
-            robozin.delay(100);
+            robozin.delay(400);
             robozin.keyRelease(KeyEvent.VK_F12);
-            robozin.delay(500);
+            robozin.delay(700);
 
             robozin.keyPress(KeyEvent.VK_ENTER);
-            robozin.delay(500);
+            robozin.delay(700);
             robozin.keyRelease(KeyEvent.VK_ENTER);
 
 
