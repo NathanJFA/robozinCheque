@@ -10,12 +10,21 @@ public class Robo {
 
         final Robot robozin = new Robot();
         final ArrayList <Cheque> listaCheque = new ArrayList<>();
-        final int _VALOR = 70;
-        final String _DATA = "01/10/2020";
-        final int _CONTA = 1;
+
+        
+        //RECEBE A DATA E MIGRA NUM ARRAY
+        String data = JOptionPane.showInputDialog("Digite a data a descontar.. ( com barras / )");
+        if(data.length() < 9 ) { 
+            JOptionPane.showMessageDialog(null, "Erro na data, o sistema fechará automaticamente!!");
+            System.exit(1);
+        String [] arrayData = new String[data.length()];
+        for(int d = 0; d < data.length(); d++){
+            Object object =  data.charAt(d);
+            arrayData[d] = object.toString();
+            
+        }
         final int nx = Integer.parseInt(JOptionPane.showInputDialog("Quantos cheques quer descontar?"));
         final int digitos = Integer.parseInt(JOptionPane.showInputDialog("Desses cheques que irá inserir, tem quantos digitos no geral?"));
-        
         //PEGANDO O NUMERO DO CHEQUE
         for(int k = 0; k < nx; k++){
 
