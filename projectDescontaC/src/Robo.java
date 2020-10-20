@@ -2,23 +2,28 @@ import java.awt.Robot;
 import java.util.ArrayList;
 //import java.util.List;
 import java.awt.event.KeyEvent;
+        
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.awt.AWTException;
 
 public class Robo {
+    private static KeyEvent evt;
+
     public static void main (final String[] args) throws Exception {
 
+        JButton btnExit;
         final Robot robozin = new Robot();
         final ArrayList <Cheque> listaCheque = new ArrayList<>();
 
         
         //RECEBE A DATA E MIGRA NUM ARRAY
-        String data = JOptionPane.showInputDialog("Digite a data a descontar.. ( com barras / )");
+        String data = JOptionPane.showInputDialog("Digite a data a descontar.. ( SEM BARRAS )");
         //verificando
-        if(data.length() < 9 ) { 
+        if(data.length() < 7 ) { 
             JOptionPane.showMessageDialog(null, "Erro na data, o sistema fechará automaticamente!!");
             System.exit(1);
-            
+        } 
         String [] arrayData = new String[data.length()];
         for(int d = 0; d < data.length(); d++){
             Object object =  data.charAt(d);
@@ -34,7 +39,7 @@ public class Robo {
             final Cheque c  = new Cheque (chequeUnitario);
             listaCheque.add(c);
         }
-        JOptionPane.showMessageDialog(null, "Você tem 4 segundos para Abrir a tela do PublicSoft e o Robô iniciar");
+        JOptionPane.showMessageDialog(null, "Você tem 4 segundos para Abrir a tela do PublicSoft e o Robô iniciar, CASO DESEJE PARAR O PROCEDIMENTO, TECLE ( P )");
         robozin.delay(4000);
         //FAZ A OPERAÇÃO COMPLETA DE UM DESCONTO DE CHEQUE
         for(final Cheque c : listaCheque){
@@ -61,7 +66,6 @@ public class Robo {
             }
             //DIGITANDO AS KEYS DO CHEQUE
             for(int i : arrayNC){
-                //JOptionPane.showMessageDialog(null, i);
                 if(i == 0){
                     robozin.keyPress(KeyEvent.VK_0);
                     robozin.keyRelease(KeyEvent.VK_0);
@@ -105,10 +109,6 @@ public class Robo {
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
             
-
-            
-
-            
             // CLICANDO NA CAIXA (DESCONTAR "SIM")
             robozin.mouseMove(219, 285);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
@@ -148,7 +148,10 @@ public class Robo {
 
             // LEMBRAR DE COPIAR A DATA
             for(String s: arrayData){
-                if(s.equalsIgnoreCase("1")){
+                if(s.equalsIgnoreCase("0")){
+                    robozin.keyPress(KeyEvent.VK_0);
+                    robozin.keyRelease(KeyEvent.VK_0);
+                }else if(s.equalsIgnoreCase("1")){
                     robozin.keyPress(KeyEvent.VK_1);
                     robozin.keyRelease(KeyEvent.VK_1);
                 }else if(s.equalsIgnoreCase("2")){
@@ -175,9 +178,6 @@ public class Robo {
                 }else if(s.equalsIgnoreCase("9")){
                     robozin.keyPress(KeyEvent.VK_9);
                     robozin.keyRelease(KeyEvent.VK_9);
-                }else if(s.equalsIgnoreCase("/")){
-                    robozin.keyPress(KeyEvent.VK_SLASH);
-                    robozin.keyRelease(KeyEvent.VK_SLASH);
                 }
                 robozin.delay(500);
             }
@@ -191,11 +191,17 @@ public class Robo {
             robozin.keyPress(KeyEvent.VK_ENTER);
             robozin.delay(700);
             robozin.keyRelease(KeyEvent.VK_ENTER);
-
-
-
             
-            }JOptionPane.showMessageDialog(null,"FIM..");
-        }
+            /*btnExit = new JButton ();
+            btnExit.setText("Exit");
+            btnExit.setMnemonic(KeyEvent.VK_N);
+            btnExit.addActionListener(new FecharListener());
+            */
+             
+			if (evt.getKeyCode() == KeyEvent.VK_P) {
+                JOptionPane.showMessageDialog(null,"Obrigado por utilizar o programa, o último Cheque foi o "+ c.getNumero());
+                System.exit(1);
+            }     
+        }JOptionPane.showMessageDialog(null,"FIM..");     
     }
 }
