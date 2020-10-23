@@ -1,14 +1,11 @@
 import java.awt.Robot;
 import java.util.ArrayList;
-//import java.util.List;
 import java.awt.event.KeyEvent;
-        
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import java.awt.AWTException;
+
 
 public class Robo {
-    private static KeyEvent evt;
+    
 
     public static void main (final String[] args) throws Exception {
 
@@ -29,14 +26,21 @@ public class Robo {
             Object object =  data.charAt(d);
             arrayData[d] = object.toString();
         }
-        final int quantCheques = Integer.parseInt(JOptionPane.showInputDialog("Quantos cheques quer descontar?"));
+        /*final int quantCheques = Integer.parseInt(JOptionPane.showInputDialog("Quantos cheques quer descontar?"));
         for(int k = 0; k < quantCheques; k++){
 
             final String chequeUnitario = JOptionPane.showInputDialog("Qual o numero do " + ( k+1 ) + " Cheque?");
             if(chequeUnitario == null || chequeUnitario.equals(""))   { System.exit(1);  } 
             final Cheque c  = new Cheque (chequeUnitario);
             listaCheque.add(c);
+        }*/
+        String chequeEmLote = JOptionPane.showInputDialog("Digite o cheque, dê ( + ) e digite o próximo cheque..");     
+        String [] arrayCheques =  chequeEmLote.split("+");
+        for(String i : arrayCheques){
+            Cheque c = new Cheque (i);
+            listaCheque.add(c);
         }
+
         JOptionPane.showMessageDialog(null, "Você tem 30 segundos para Abrir a tela do PublicSoft e o Robô iniciar!");
         robozin.delay(30000);
         //FAZ A OPERAÇÃO COMPLETA DE UM DESCONTO DE CHEQUE
@@ -107,6 +111,7 @@ public class Robo {
             robozin.mouseMove(699, 421);
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+            robozin.delay(1500);
             
             // CLICANDO NA CAIXA (DESCONTAR "SIM")
             robozin.mouseMove(219, 285);
@@ -137,13 +142,13 @@ public class Robo {
                 robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
                 robozin.delay(500);
             
-            }for(int i = 0; i < arrayData.length; i++) {
+            }/*for(int i = 0; i < arrayData.length; i++) {
                 robozin.keyPress(KeyEvent.VK_DELETE);
                 robozin.keyPress(KeyEvent.VK_DELETE);
-                robozin.delay(500);
+                robozin.delay(500); 
                 
-            }
-               
+            } */
+            robozin.delay(500);
 
             //Escrevendo a data
             for(String s: arrayData){
