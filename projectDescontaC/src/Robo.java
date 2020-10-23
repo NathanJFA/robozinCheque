@@ -169,7 +169,7 @@ public class Robo {
                 }
                 robozin.delay(500);
             }
-            //GRAVANDO
+            //GRAVANDO O SISTEMA
             robozin.delay(1000);
             robozin.keyPress(KeyEvent.VK_F12);
             robozin.keyRelease(KeyEvent.VK_F12);
