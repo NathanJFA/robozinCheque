@@ -26,14 +26,6 @@ public class Robo {
             Object object =  data.charAt(d);
             arrayData[d] = object.toString();
         }
-        /*final int quantCheques = Integer.parseInt(JOptionPane.showInputDialog("Quantos cheques quer descontar?"));
-        for(int k = 0; k < quantCheques; k++){
-
-            final String chequeUnitario = JOptionPane.showInputDialog("Qual o numero do " + ( k+1 ) + " Cheque?");
-            if(chequeUnitario == null || chequeUnitario.equals(""))   { System.exit(1);  } 
-            final Cheque c  = new Cheque (chequeUnitario);
-            listaCheque.add(c);
-        }*/
         String chequeEmLote = JOptionPane.showInputDialog("Digite o cheque, dê ( + ) e digite o próximo cheque..");     
         String [] arrayCheques =  chequeEmLote.split("+");
         for(String i : arrayCheques){
@@ -118,16 +110,6 @@ public class Robo {
             robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
             robozin.delay(1000);
-            /*robozin.keyPress(KeyEvent.VK_ENTER);
-            robozin.keyRelease(KeyEvent.VK_ENTER);  
-            robozin.delay(1000);
-            //718,415
-            robozin.mouseMove(718, 415);
-            robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
-            robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
-            robozin.mouseMove(699, 421);
-            robozin.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
-            robozin.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK); */
 
             // CLICANDO NA DATA 
             //290,345
@@ -142,12 +124,7 @@ public class Robo {
                 robozin.keyRelease(KeyEvent.VK_BACK_SPACE);
                 robozin.delay(500);
             
-            }/*for(int i = 0; i < arrayData.length; i++) {
-                robozin.keyPress(KeyEvent.VK_DELETE);
-                robozin.keyPress(KeyEvent.VK_DELETE);
-                robozin.delay(500); 
-                
-            } */
+            }
             robozin.delay(500);
 
             //Escrevendo a data
