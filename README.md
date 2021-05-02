@@ -1,1 +1,1 @@
-# robozinContabil
+enquanto trabalho na prefeitura, descontar cheques é uma coisa que da muito tédio, pois é repetitivo, então fiz um programinha que desconta o cheque passando só a lista de números, e alterando a data padrão, e o programa faz o resto.
