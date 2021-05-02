@@ -8,6 +8,6 @@ public class Cheque {
         this.numero = "";
     }
     public String getNumero(){
-        return numero;
+        return numero ;
     }
 }
